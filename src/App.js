@@ -1,5 +1,16 @@
+import useSound from "use-sound";
+import newHorizon from "./sounds/dillon-anh.m4a";
+
 function App() {
-  return <div>Dillon rocks</div>;
+  const [play, { stop }] = useSound(newHorizon);
+
+  return (
+    <div>
+      <button onMouseDown={play} onMouseUp={() => stop()}>
+        Play!
+      </button>
+    </div>
+  );
 }
 
 export default App;
