@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import ReactHowler from "react-howler";
 
 console.log("initializing socket");
-const socket = io("localhost:8080");
+const socket = io("https://pit-applause-server.herokuapp.com");
 
 function App() {
   const [name, setName] = useState("");
