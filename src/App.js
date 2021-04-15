@@ -13,17 +13,23 @@ function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    console.log("EFFECT");
-    socket.on("update", (payload) => {
+    socket.on("welcome", (payload) => {
       setEntered(true);
       setCount(payload.count);
       setClapping(payload.clapping);
     });
 
+    socket.on("update", (payload) => {
+      if (entered) {
+        setCount(payload.count);
+        setClapping(payload.clapping);
+      }
+    });
+
     socket.on("error", (message) => {
       setError(message);
     });
-  }, []);
+  }, [entered]);
 
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -41,8 +47,8 @@ function App() {
 
   const onMock = () => {
     const personNum = Math.ceil(Math.random() * 1000);
-    socket.emit("enter", `Person ${personNum * 0}`);
-    socket.emit("clap", `Person ${personNum * 0}`);
+    socket.emit("enter", `Person ${personNum}`);
+    socket.emit("clap", `Person ${personNum}`);
   };
 
   const onClear = () => {
@@ -75,7 +81,7 @@ function App() {
         <div key={name}>{name}</div>
       ))}
       {clapping.map((name) => (
-        <ReactHowler key={name} src="dillon-anh.mp3" loop html5 />
+        <ReactHowler key={name} src="clapping.mp3" loop html5 />
       ))}
     </div>
   );
