@@ -1,39 +1,52 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import useSound from "use-sound";
-import newHorizon from "./sounds/dillon-anh.m4a";
+import ReactHowler from "react-howler";
 
 console.log("initializing socket");
 const socket = io("localhost:8080");
 
 function App() {
-  const [play, { stop }] = useSound(newHorizon);
   const [name, setName] = useState("");
   const [entered, setEntered] = useState(false);
   const [count, setCount] = useState(1);
-  const [clapping, setClapping] = useState(0);
+  const [clapping, setClapping] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log("EFFECT");
     socket.on("update", (payload) => {
-      console.log(payload);
+      setEntered(true);
       setCount(payload.count);
       setClapping(payload.clapping);
+    });
+
+    socket.on("error", (message) => {
+      setError(message);
     });
   }, []);
 
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
-      setEntered(true);
       socket.emit("enter", name);
     }
   };
 
   const onPlay = () => {
-    socket.emit("clap");
+    socket.emit("clap", name);
   };
 
   const onStop = () => {
-    socket.emit("end_clap");
+    socket.emit("end_clap", name);
+  };
+
+  const onMock = () => {
+    const personNum = Math.ceil(Math.random() * 1000);
+    socket.emit("enter", `Person ${personNum * 0}`);
+    socket.emit("clap", `Person ${personNum * 0}`);
+  };
+
+  const onClear = () => {
+    socket.emit("clear");
   };
 
   return !entered ? (
@@ -43,14 +56,27 @@ function App() {
         onChange={({ target }) => setName(target.value)}
         onKeyPress={onKeyPress}
       />
+      {error && <div>{error}</div>}
     </div>
   ) : (
     <div>
       <button onMouseDown={onPlay} onMouseUp={onStop}>
         Play!
       </button>
+      {name === "root" && (
+        <>
+          <button onMouseDown={onMock}>Mock Person</button>
+          <button onMouseDown={onClear}>Clear All</button>
+        </>
+      )}
       <div>{count} here</div>
-      <div>{clapping} clapping</div>
+      <div>{clapping.length} clapping</div>
+      {clapping.map((name) => (
+        <div key={name}>{name}</div>
+      ))}
+      {clapping.map((name) => (
+        <ReactHowler key={name} src="dillon-anh.mp3" loop html5 />
+      ))}
     </div>
   );
 }
