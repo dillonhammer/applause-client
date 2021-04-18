@@ -95,6 +95,8 @@ function App() {
       <Button type="primary" onClick={() => onEnter(name)}>
         Join Room
       </Button>
+      <br />
+      <br />
       {error && <div>{error}</div>}
     </WelcomeContainer>
   ) : (
@@ -144,6 +146,8 @@ function App() {
             <ReactHowler key={name} src="airhorn.mp3" loop html5 />
           ))}
         </ButtonContainer>
+        <ButtonContainer />
+        <ButtonContainer />
       </GridContainer>
     </RoomContainer>
   );
