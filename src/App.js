@@ -108,6 +108,7 @@ function App() {
             type="primary"
             onMouseDown={() => onSend("clap")}
             onMouseUp={() => onSend("end_clap")}
+            onMouseLeave={() => onSend("end_clap")}
           >
             Hold to Clap
           </Button>
@@ -130,6 +131,7 @@ function App() {
             danger
             onMouseDown={() => onSend("airhorn")}
             onMouseUp={() => onSend("end_airhorn")}
+            onMouseLeave={() => onSend("end_airhorn")}
           >
             Hold to Airhorn
           </Button>
