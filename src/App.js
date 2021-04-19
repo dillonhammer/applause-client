@@ -112,7 +112,9 @@ function App() {
         <ButtonContainer>
           <Button
             type="primary"
-            onMouseDown={() => onSend("clap")}
+            onMouseDown={({ button }) => {
+              if (button === 0) onSend("clap");
+            }}
             onMouseUp={() => onSend("end_clap")}
             onMouseLeave={() => onSend("end_clap")}
           >
@@ -135,7 +137,9 @@ function App() {
           <Button
             type="primary"
             danger
-            onMouseDown={() => onSend("airhorn")}
+            onMouseDown={({ button }) => {
+              if (button === 0) onSend("airhorn");
+            }}
             onMouseUp={() => onSend("end_airhorn")}
             onMouseLeave={() => onSend("end_airhorn")}
           >
