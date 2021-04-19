@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import ReactHowler from "react-howler";
 import styled from "styled-components";
-import { Button, Input } from "antd";
+import { Button, Input, Slider } from "antd";
 import "antd/dist/antd.css";
 
 console.log("initializing socket");
@@ -29,6 +29,7 @@ function App() {
   const [name, setName] = useState("");
   const [entered, setEntered] = useState(false);
   const [count, setCount] = useState(1);
+  const [volume, setVolume] = useState(80);
   const [clapping, setClapping] = useState([]);
   const [airhorns, setAirhorns] = useState([]);
   const [error, setError] = useState("");
@@ -102,6 +103,11 @@ function App() {
   ) : (
     <RoomContainer>
       <p>{count} Here</p>
+      <Slider
+        defaultValue={volume}
+        onChange={(value) => setVolume(value)}
+        style={{ width: 200 }}
+      />
       <GridContainer>
         <ButtonContainer>
           <Button
@@ -142,10 +148,22 @@ function App() {
             <div key={name}>{name}</div>
           ))}
           {clapping.map((name) => (
-            <ReactHowler key={name} src="clapping.mp3" loop html5 />
+            <ReactHowler
+              key={name}
+              src="clapping.mp3"
+              loop
+              html5
+              volume={volume / 100}
+            />
           ))}
           {airhorns.map((name) => (
-            <ReactHowler key={name} src="airhorn.mp3" loop html5 />
+            <ReactHowler
+              key={name}
+              src="airhorn.mp3"
+              loop
+              html5
+              volume={volume / 100}
+            />
           ))}
         </ButtonContainer>
         <ButtonContainer />
