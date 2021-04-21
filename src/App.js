@@ -12,6 +12,9 @@ function App() {
   const [count, setCount] = useState(1);
   const [clapping, setClapping] = useState([]);
   const [airhorns, setAirhorns] = useState([]);
+  const [boos, setBoos] = useState([]);
+  const [nytJingles, setNytJingles] = useState([]);
+  const [nytRemixes, setNytRemixes] = useState([]);
 
   useEffect(() => {
     socket.on("welcome", (payload) => {
@@ -24,6 +27,9 @@ function App() {
         setCount(payload.count);
         setClapping(payload.clap);
         setAirhorns(payload.airhorn);
+        setBoos(payload.boo);
+        setNytRemixes(payload.nytRemix);
+        setNytJingles(payload.nyt);
       }
     });
   }, [entered]);
@@ -37,6 +43,9 @@ function App() {
       count={count}
       clapping={clapping}
       airhorns={airhorns}
+      boos={boos}
+      nytRemixes={nytRemixes}
+      nytJingles={nytJingles}
     />
   );
 }

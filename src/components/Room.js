@@ -14,7 +14,7 @@ const HeaderContainer = styled.div`
 
 const RoomCount = styled.div`
   float: left;
-  margin-top: 6px;
+  margin-top: 4px;
 `;
 
 const VolumeIconContainer = styled.div`
@@ -30,14 +30,20 @@ const VolumeSliderContainer = styled.div`
 `;
 
 const GridContainer = styled.div`
+  margin-top: 20px;
   display: flex;
 `;
 
-const ButtonContainer = styled.div`
-  flex: 1;
-`;
-
-const Room = ({ socket, name, count, clapping, airhorns }) => {
+const Room = ({
+  socket,
+  name,
+  count,
+  clapping,
+  airhorns,
+  boos,
+  nytJingles,
+  nytRemixes,
+}) => {
   const [volume, setVolume] = useState(80);
   const [muted, setMuted] = useState(false);
 
@@ -86,8 +92,36 @@ const Room = ({ socket, name, count, clapping, airhorns }) => {
           desc={"Airhorns"}
           volume={muted ? 0 : volume / 100}
         />
-        <ButtonContainer />
-        <ButtonContainer />
+        <SoundCard
+          socket={socket}
+          name={name}
+          sound="boo"
+          src="boo.mp3"
+          prompt="Hold to Boo"
+          names={boos}
+          desc={"Booing"}
+          volume={muted ? 0 : volume / 100}
+        />
+        <SoundCard
+          socket={socket}
+          name={name}
+          sound="nyt"
+          src="nyt.mp3"
+          prompt="Hold to NYT Jingle"
+          names={nytJingles}
+          desc={"NYT Jingles"}
+          volume={muted ? 0 : volume / 100}
+        />
+        <SoundCard
+          socket={socket}
+          name={name}
+          sound="nytRemix"
+          src="nyt-remix.mp3"
+          prompt="Hold to NYT Remix"
+          names={nytRemixes}
+          desc={"NYT Remixes"}
+          volume={muted ? 0 : volume / 100}
+        />
       </GridContainer>
     </RoomContainer>
   );
