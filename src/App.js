@@ -2,16 +2,12 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import ReactHowler from "react-howler";
 import styled from "styled-components";
-import { Button, Input, Slider } from "antd";
+import { Button, Slider } from "antd";
 import "antd/dist/antd.css";
+import { VolumeUpRounded, VolumeOffRounded } from "@material-ui/icons";
+import Welcome from "./components/Welcome";
 
-console.log("initializing socket");
 const socket = io("https://pit-applause-server.herokuapp.com");
-
-const WelcomeContainer = styled.div`
-  margin: 40px;
-  text-align: center;
-`;
 
 const GridContainer = styled.div`
   display: flex;
@@ -32,14 +28,11 @@ function App() {
   const [volume, setVolume] = useState(80);
   const [clapping, setClapping] = useState([]);
   const [airhorns, setAirhorns] = useState([]);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     socket.on("welcome", (payload) => {
       setEntered(true);
-      setCount(payload.count);
-      setClapping(payload.clap);
-      setAirhorns(payload.airhorn);
+      setName(payload);
     });
 
     socket.on("update", (payload) => {
@@ -49,25 +42,7 @@ function App() {
         setAirhorns(payload.airhorn);
       }
     });
-
-    socket.on("error", (message) => {
-      setError(message);
-    });
   }, [entered]);
-
-  const onKeyPress = (event) => {
-    if (event.key === "Enter") {
-      onEnter(name);
-    }
-  };
-
-  const onEnter = (name) => {
-    if (name) {
-      socket.emit("enter", name);
-    } else {
-      setError("Name cannot be empty");
-    }
-  };
 
   const onSend = (sound, type) => {
     socket.emit("sound", { name, sound, type });
@@ -88,25 +63,11 @@ function App() {
   };
 
   return !entered ? (
-    <WelcomeContainer>
-      <p>Enter your name</p>
-      <Input
-        onChange={({ target }) => setName(target.value)}
-        onKeyPress={onKeyPress}
-        style={{ width: 200 }}
-      />
-      <br />
-      <br />
-      <Button type="primary" onClick={() => onEnter(name)}>
-        Join Room
-      </Button>
-      <br />
-      <br />
-      {error && <div>{error}</div>}
-    </WelcomeContainer>
+    <Welcome socket={socket} />
   ) : (
     <RoomContainer>
       <p>{count} Here</p>
+      <VolumeUpRounded />
       <Slider
         defaultValue={volume}
         onChange={(value) => setVolume(value)}
