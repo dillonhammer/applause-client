@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Button, Slider } from "antd";
-import ReactHowler from "react-howler";
+import { Slider } from "antd";
 import { VolumeUpRounded, VolumeOffRounded } from "@material-ui/icons";
+import SoundCard from "./SoundCard";
 
 const RoomContainer = styled.div`
-  margin: 40px;
+  margin: 50px;
 `;
 
 const HeaderContainer = styled.div`
@@ -50,10 +50,6 @@ const Room = ({ socket, name, count, clapping, airhorns }) => {
     setMuted(!muted);
   };
 
-  const onSend = (sound, type) => {
-    socket.emit("sound", { name, sound, type });
-  };
-
   return (
     <RoomContainer>
       <HeaderContainer>
@@ -70,61 +66,26 @@ const Room = ({ socket, name, count, clapping, airhorns }) => {
         </VolumeSliderContainer>
       </HeaderContainer>
       <GridContainer>
-        <ButtonContainer>
-          <Button
-            type="primary"
-            onMouseDown={({ button }) => {
-              if (button === 0) onSend("clap", "START");
-            }}
-            onMouseUp={() => onSend("clap", "STOP")}
-            onMouseLeave={() => onSend("clap", "STOP")}
-          >
-            Hold to Clap
-          </Button>
-          <br />
-          <br />
-          <div>{clapping.length} Clapping</div>
-          {clapping.map((name) => (
-            <div key={name}>{name}</div>
-          ))}
-        </ButtonContainer>
-        <ButtonContainer>
-          <Button
-            type="primary"
-            danger
-            onMouseDown={({ button }) => {
-              if (button === 0) onSend("airhorn", "START");
-            }}
-            onMouseUp={() => onSend("airhorn", "STOP")}
-            onMouseLeave={() => onSend("airhorn", "STOP")}
-          >
-            Hold to Airhorn
-          </Button>
-          <br />
-          <br />
-          <div>{airhorns.length} Airhorns</div>
-          {airhorns.map((name) => (
-            <div key={name}>{name}</div>
-          ))}
-          {clapping.map((name) => (
-            <ReactHowler
-              key={name}
-              src="clapping.mp3"
-              loop
-              html5
-              volume={muted ? 0 : volume / 100}
-            />
-          ))}
-          {airhorns.map((name) => (
-            <ReactHowler
-              key={name}
-              src="airhorn.mp3"
-              loop
-              html5
-              volume={muted ? 0 : volume / 100}
-            />
-          ))}
-        </ButtonContainer>
+        <SoundCard
+          socket={socket}
+          name={name}
+          sound="clap"
+          src="clapping.mp3"
+          prompt="Hold to Clap"
+          names={clapping}
+          desc={"Clapping"}
+          volume={muted ? 0 : volume / 100}
+        />
+        <SoundCard
+          socket={socket}
+          name={name}
+          sound="airhorn"
+          src="airhorn.mp3"
+          prompt="Hold to Airhorn"
+          names={airhorns}
+          desc={"Airhorns"}
+          volume={muted ? 0 : volume / 100}
+        />
         <ButtonContainer />
         <ButtonContainer />
       </GridContainer>

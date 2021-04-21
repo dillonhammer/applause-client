@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button, Input } from "antd";
 
 const WelcomeContainer = styled.div`
-  margin: 40px;
+  margin: 50px;
   text-align: center;
 `;
 
