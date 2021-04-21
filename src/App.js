@@ -38,15 +38,15 @@ function App() {
     socket.on("welcome", (payload) => {
       setEntered(true);
       setCount(payload.count);
-      setClapping(payload.clapping);
-      setAirhorns(payload.airhorns);
+      setClapping(payload.clap);
+      setAirhorns(payload.airhorn);
     });
 
     socket.on("update", (payload) => {
       if (entered) {
         setCount(payload.count);
-        setClapping(payload.clapping);
-        setAirhorns(payload.airhorns);
+        setClapping(payload.clap);
+        setAirhorns(payload.airhorn);
       }
     });
 
@@ -69,14 +69,18 @@ function App() {
     }
   };
 
-  const onSend = (event) => {
-    socket.emit(event, name);
+  const onSend = (sound, type) => {
+    socket.emit("sound", { name, sound, type });
   };
 
   const onMock = () => {
     const personNum = Math.ceil(Math.random() * 1000);
     socket.emit("enter", `Person ${personNum}`);
-    socket.emit("clap", `Person ${personNum}`);
+    socket.emit("sound", {
+      name: `Person ${personNum}`,
+      sound: "clap",
+      type: "START",
+    });
   };
 
   const onClear = () => {
@@ -113,10 +117,10 @@ function App() {
           <Button
             type="primary"
             onMouseDown={({ button }) => {
-              if (button === 0) onSend("clap");
+              if (button === 0) onSend("clap", "START");
             }}
-            onMouseUp={() => onSend("end_clap")}
-            onMouseLeave={() => onSend("end_clap")}
+            onMouseUp={() => onSend("clap", "STOP")}
+            onMouseLeave={() => onSend("clap", "STOP")}
           >
             Hold to Clap
           </Button>
@@ -138,10 +142,10 @@ function App() {
             type="primary"
             danger
             onMouseDown={({ button }) => {
-              if (button === 0) onSend("airhorn");
+              if (button === 0) onSend("airhorn", "START");
             }}
-            onMouseUp={() => onSend("end_airhorn")}
-            onMouseLeave={() => onSend("end_airhorn")}
+            onMouseUp={() => onSend("airhorn", "STOP")}
+            onMouseLeave={() => onSend("airhorn", "STOP")}
           >
             Hold to Airhorn
           </Button>
