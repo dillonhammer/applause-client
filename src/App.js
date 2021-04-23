@@ -10,6 +10,7 @@ function App() {
   const [name, setName] = useState("");
   const [entered, setEntered] = useState(false);
   const [count, setCount] = useState(1);
+  const [audience, setAudience] = useState([]);
   const [clapping, setClapping] = useState([]);
   const [airhorns, setAirhorns] = useState([]);
   const [boos, setBoos] = useState([]);
@@ -25,6 +26,7 @@ function App() {
     socket.on("update", (payload) => {
       if (entered) {
         setCount(payload.count);
+        setAudience(payload.audience);
         setClapping(payload.clap);
         setAirhorns(payload.airhorn);
         setBoos(payload.boo);
@@ -41,6 +43,7 @@ function App() {
       socket={socket}
       name={name}
       count={count}
+      audience={audience}
       clapping={clapping}
       airhorns={airhorns}
       boos={boos}

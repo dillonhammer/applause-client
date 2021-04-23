@@ -34,10 +34,28 @@ const GridContainer = styled.div`
   display: flex;
 `;
 
+const HR = styled.div`
+  margin: 10px 0px;
+  height: 4px;
+  background-color: yellowgreen;
+  border-radius: 4px;
+`;
+
+const AudienceContainer = styled.div`
+  flex: 1;
+  border-right: 4px solid yellowgreen;
+  margin-right: 20px;
+`;
+
+const AudienceName = styled.div`
+  margin: 0px;
+`;
+
 const Room = ({
   socket,
   name,
   count,
+  audience,
   clapping,
   airhorns,
   boos,
@@ -71,7 +89,13 @@ const Room = ({
           />
         </VolumeSliderContainer>
       </HeaderContainer>
+      <HR />
       <GridContainer>
+        <AudienceContainer>
+          {audience.map((audienceName) => (
+            <AudienceName>{audienceName}</AudienceName>
+          ))}
+        </AudienceContainer>
         <SoundCard
           socket={socket}
           name={name}
