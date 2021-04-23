@@ -1,1 +1,1 @@
-# Pit Applause
+# Applause
