@@ -93,7 +93,7 @@ const Room = ({
       <GridContainer>
         <AudienceContainer>
           {audience.map((audienceName) => (
-            <AudienceName>{audienceName}</AudienceName>
+            <AudienceName key={audienceName}>{audienceName}</AudienceName>
           ))}
         </AudienceContainer>
         <SoundCard
