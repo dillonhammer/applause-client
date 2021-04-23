@@ -9,11 +9,13 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled(Button)`
   border: none;
-  color: ${COLORS.WHITE.BRIGHT};
+  color: ${({ darkMode }) =>
+    darkMode ? COLORS.BACKGROUND.BLACK : COLORS.WHITE.BRIGHT};
   background-color: ${({ color }) => color.DEFAULT};
 
   :hover {
-    color: ${COLORS.WHITE.BRIGHT};
+    color: ${({ darkMode }) =>
+      darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARK};
   }
 
@@ -32,6 +34,7 @@ const SoundCard = ({
   desc,
   volume,
   color,
+  darkMode,
 }) => {
   const onSend = (sound, type) => {
     socket.emit("sound", { name, sound, type });
@@ -46,6 +49,7 @@ const SoundCard = ({
         onMouseUp={() => onSend(sound, "STOP")}
         onMouseLeave={() => onSend(sound, "STOP")}
         color={color}
+        darkMode={darkMode}
       >
         {prompt}
       </StyledButton>

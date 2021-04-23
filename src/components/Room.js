@@ -157,6 +157,7 @@ const Room = ({
           desc={"Clapping"}
           volume={muted ? 0 : volume / 100}
           color={COLORS.RED}
+          darkMode={darkMode}
         />
         <SoundCard
           socket={socket}
@@ -168,6 +169,7 @@ const Room = ({
           desc={"Airhorns"}
           volume={muted ? 0 : volume / 100}
           color={COLORS.ORANGE}
+          darkMode={darkMode}
         />
         <SoundCard
           socket={socket}
@@ -179,6 +181,7 @@ const Room = ({
           desc={"Booing"}
           volume={muted ? 0 : volume / 100}
           color={COLORS.YELLOW}
+          darkMode={darkMode}
         />
         <SoundCard
           socket={socket}
@@ -190,6 +193,7 @@ const Room = ({
           desc={"NYT Jingles"}
           volume={muted ? 0 : volume / 100}
           color={COLORS.GREEN}
+          darkMode={darkMode}
         />
         <SoundCard
           socket={socket}
@@ -201,6 +205,7 @@ const Room = ({
           desc={"NYT Remixes"}
           volume={muted ? 0 : volume / 100}
           color={COLORS.TEAL}
+          darkMode={darkMode}
         />
       </GridContainer>
     </RoomContainer>
