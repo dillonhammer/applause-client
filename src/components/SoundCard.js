@@ -9,11 +9,11 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled(Button)`
   border: none;
-  color: ${COLORS.WHITE};
+  color: ${COLORS.WHITE.BRIGHT};
   background-color: ${({ color }) => color.DEFAULT};
 
   :hover {
-    color: ${COLORS.WHITE};
+    color: ${COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARK};
   }
 

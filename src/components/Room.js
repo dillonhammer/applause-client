@@ -1,16 +1,26 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Slider } from "antd";
-import { VolumeUpRounded, VolumeOffRounded } from "@material-ui/icons";
+import { Slider, Switch } from "antd";
+import {
+  VolumeUpRounded,
+  VolumeOffRounded,
+  Brightness4Rounded,
+  Brightness7Rounded,
+} from "@material-ui/icons";
 import SoundCard from "./SoundCard";
 import COLORS from "../constants/colors";
 
 const RoomContainer = styled.div`
-  margin: 50px;
+  padding: 50px;
+  height: 100vh;
+  background-color: ${({ darkMode }) =>
+    darkMode ? COLORS.BACKGROUND.DARK : "white"};
+  color: ${({ darkMode }) => (darkMode ? COLORS.WHITE.DEFAULT : "black")};
 `;
 
 const HeaderContainer = styled.div`
   display: inline-block;
+  width: 100%;
 `;
 
 const RoomCount = styled.div`
@@ -28,6 +38,18 @@ const VolumeIconContainer = styled.div`
 const VolumeSliderContainer = styled.div`
   float: left;
   margin-left: 10px;
+`;
+
+const DarkModeSwitchContainer = styled.div`
+  float: right;
+  vertical-align: top;
+  margin-top: 5px;
+`;
+
+const BrightnessIconContainer = styled.div`
+  display: inline-block;
+  vertical-align: top;
+  margin: 1px 4px;
 `;
 
 const GridContainer = styled.div`
@@ -65,6 +87,7 @@ const Room = ({
 }) => {
   const [volume, setVolume] = useState(80);
   const [muted, setMuted] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const onVolumeChange = (value) => {
     setMuted(false);
@@ -76,19 +99,46 @@ const Room = ({
   };
 
   return (
-    <RoomContainer>
+    <RoomContainer darkMode={darkMode}>
       <HeaderContainer>
         <RoomCount>{count} Here</RoomCount>
         <VolumeIconContainer onClick={onMute}>
-          {muted ? <VolumeOffRounded /> : <VolumeUpRounded />}
+          {muted ? (
+            <VolumeOffRounded
+              style={{
+                color: darkMode ? COLORS.WHITE.DEFAULT : COLORS.BACKGROUND.BLUE,
+              }}
+            />
+          ) : (
+            <VolumeUpRounded
+              style={{
+                color: darkMode ? COLORS.WHITE.DEFAULT : COLORS.BACKGROUND.BLUE,
+              }}
+            />
+          )}
         </VolumeIconContainer>
         <VolumeSliderContainer>
           <Slider
             value={muted ? 0 : volume}
             onChange={onVolumeChange}
             style={{ width: 200 }}
+            handleStyle={{ borderColor: COLORS.BACKGROUND.BLUE }}
+            trackStyle={{ backgroundColor: COLORS.BACKGROUND.BLUE }}
           />
         </VolumeSliderContainer>
+        <DarkModeSwitchContainer>
+          <BrightnessIconContainer>
+            <Brightness7Rounded style={{ color: COLORS.BACKGROUND.BLUE }} />
+          </BrightnessIconContainer>
+          <Switch
+            defaultChecked
+            onChange={(checked) => setDarkMode(checked)}
+            style={{ backgroundColor: COLORS.BACKGROUND.BLUE }}
+          />
+          <BrightnessIconContainer>
+            <Brightness4Rounded style={{ color: COLORS.BACKGROUND.BLUE }} />
+          </BrightnessIconContainer>
+        </DarkModeSwitchContainer>
       </HeaderContainer>
       <HR />
       <GridContainer>

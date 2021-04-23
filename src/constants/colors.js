@@ -7,7 +7,7 @@ const COLORS = {
   BLUE: { DEFAULT: "#9B91D8", DARK: "#766fa6", DARKEST: "#56517a" },
   VIOLET: { DEFAULT: "#BF89B9", DARK: "#8f658a", DARKEST: "#634660" },
   PINK: { DEFAULT: "#EA85A8", DARK: "#ad617c", DARKEST: "#82495d" },
-  WHITE: "#ECEFF4",
+  WHITE: { DEFAULT: "#ECEFF4", DARK: "#d8dee9", BRIGHT: "#FFFFFF" },
   BACKGROUND: {
     LIGHT: "#434c5e",
     DARK: "#3B4252",
