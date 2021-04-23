@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Slider } from "antd";
 import { VolumeUpRounded, VolumeOffRounded } from "@material-ui/icons";
 import SoundCard from "./SoundCard";
+import COLORS from "../constants/colors";
 
 const RoomContainer = styled.div`
   margin: 50px;
@@ -37,13 +38,13 @@ const GridContainer = styled.div`
 const HR = styled.div`
   margin: 10px 0px;
   height: 4px;
-  background-color: yellowgreen;
+  background-color: ${COLORS.BACKGROUND.BLUE};
   border-radius: 4px;
 `;
 
 const AudienceContainer = styled.div`
   flex: 1;
-  border-right: 4px solid yellowgreen;
+  border-right: 4px solid ${COLORS.BACKGROUND.BLUE};
   margin-right: 20px;
 `;
 
@@ -105,6 +106,7 @@ const Room = ({
           names={clapping}
           desc={"Clapping"}
           volume={muted ? 0 : volume / 100}
+          color={COLORS.RED}
         />
         <SoundCard
           socket={socket}
@@ -115,6 +117,7 @@ const Room = ({
           names={airhorns}
           desc={"Airhorns"}
           volume={muted ? 0 : volume / 100}
+          color={COLORS.ORANGE}
         />
         <SoundCard
           socket={socket}
@@ -125,6 +128,7 @@ const Room = ({
           names={boos}
           desc={"Booing"}
           volume={muted ? 0 : volume / 100}
+          color={COLORS.YELLOW}
         />
         <SoundCard
           socket={socket}
@@ -135,6 +139,7 @@ const Room = ({
           names={nytJingles}
           desc={"NYT Jingles"}
           volume={muted ? 0 : volume / 100}
+          color={COLORS.GREEN}
         />
         <SoundCard
           socket={socket}
@@ -145,6 +150,7 @@ const Room = ({
           names={nytRemixes}
           desc={"NYT Remixes"}
           volume={muted ? 0 : volume / 100}
+          color={COLORS.TEAL}
         />
       </GridContainer>
     </RoomContainer>

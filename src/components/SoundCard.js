@@ -1,9 +1,25 @@
 import styled from "styled-components";
 import { Button } from "antd";
 import ReactHowler from "react-howler";
+import COLORS from "../constants/colors";
 
 const ButtonContainer = styled.div`
   flex: 1;
+`;
+
+const StyledButton = styled(Button)`
+  border: none;
+  color: ${COLORS.WHITE};
+  background-color: ${({ color }) => color.DEFAULT};
+
+  :hover {
+    color: ${COLORS.WHITE};
+    background-color: ${({ color }) => color.DARK};
+  }
+
+  :active {
+    background-color: ${({ color }) => color.DARKEST};
+  }
 `;
 
 const SoundCard = ({
@@ -15,6 +31,7 @@ const SoundCard = ({
   names,
   desc,
   volume,
+  color,
 }) => {
   const onSend = (sound, type) => {
     socket.emit("sound", { name, sound, type });
@@ -22,16 +39,16 @@ const SoundCard = ({
 
   return (
     <ButtonContainer>
-      <Button
-        type="primary"
+      <StyledButton
         onMouseDown={({ button }) => {
           if (button === 0) onSend(sound, "START");
         }}
         onMouseUp={() => onSend(sound, "STOP")}
         onMouseLeave={() => onSend(sound, "STOP")}
+        color={color}
       >
         {prompt}
-      </Button>
+      </StyledButton>
       <br />
       <br />
       <div>
