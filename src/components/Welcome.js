@@ -23,6 +23,7 @@ const WelcomeButton = styled(Button)`
   }
 
   :active {
+    color: ${COLORS.WHITE.DARK};
     background-color: ${({ color }) => color.DARKEST};
   }
 `;

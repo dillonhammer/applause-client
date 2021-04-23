@@ -9,17 +9,19 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled(Button)`
   border: none;
-  color: ${({ darkMode }) =>
-    darkMode ? COLORS.BACKGROUND.BLACK : COLORS.WHITE.BRIGHT};
+  color: ${({ $darkMode }) =>
+    $darkMode ? COLORS.BACKGROUND.BLACK : COLORS.WHITE.BRIGHT};
   background-color: ${({ color }) => color.DEFAULT};
 
   :hover {
-    color: ${({ darkMode }) =>
-      darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
+    color: ${({ $darkMode }) =>
+      $darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARK};
   }
 
   :active {
+    color: ${({ $darkMode }) =>
+      $darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARKEST};
   }
 `;
@@ -49,7 +51,7 @@ const SoundCard = ({
         onMouseUp={() => onSend(sound, "STOP")}
         onMouseLeave={() => onSend(sound, "STOP")}
         color={color}
-        darkMode={darkMode}
+        $darkMode={darkMode}
       >
         {prompt}
       </StyledButton>
