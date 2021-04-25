@@ -67,7 +67,6 @@ const HR = styled.div`
 const AudienceContainer = styled.div`
   flex: 1;
   border-right: 4px solid ${COLORS.BACKGROUND.BLUE};
-  margin-right: 20px;
 `;
 
 const AudienceName = styled.div`
