@@ -1,14 +1,20 @@
 import styled from "styled-components";
-import { Button } from "antd";
 import ReactHowler from "react-howler";
 import COLORS from "../constants/colors";
 
 const ButtonContainer = styled.div`
   flex: 1;
+  text-align: center;
 `;
 
-const StyledButton = styled(Button)`
-  border: none;
+const StyledButton = styled.div`
+  cursor: pointer;
+  user-select: none;
+  line-height: 40px;
+  margin: 0px 20px;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 3px solid ${({ color }) => color.DARK};
   color: ${({ $darkMode }) =>
     $darkMode ? COLORS.BACKGROUND.BLACK : COLORS.WHITE.BRIGHT};
   background-color: ${({ color }) => color.DEFAULT};
@@ -17,12 +23,14 @@ const StyledButton = styled(Button)`
     color: ${({ $darkMode }) =>
       $darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARK};
+    border: 3px solid ${({ color }) => color.DEFAULT};
   }
 
   :active {
     color: ${({ $darkMode }) =>
       $darkMode ? COLORS.WHITE.DARK : COLORS.WHITE.BRIGHT};
     background-color: ${({ color }) => color.DARKEST};
+    border: 3px solid ${({ color }) => color.DEFAULT};
   }
 `;
 
@@ -55,7 +63,6 @@ const SoundCard = ({
       >
         {prompt}
       </StyledButton>
-      <br />
       <br />
       <div>
         {names.length} {desc}
