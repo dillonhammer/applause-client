@@ -16,6 +16,9 @@ function App() {
   const [boos, setBoos] = useState([]);
   const [nytJingles, setNytJingles] = useState([]);
   const [nytRemixes, setNytRemixes] = useState([]);
+  const [screams, setScreams] = useState([]);
+  const [beeBooBooBops, setBeeBooBooBops] = useState([]);
+  const [seinfelds, setSeinfelds] = useState([]);
 
   useEffect(() => {
     socket.on("welcome", (payload) => {
@@ -32,6 +35,9 @@ function App() {
         setBoos(payload.boo);
         setNytRemixes(payload.nytRemix);
         setNytJingles(payload.nyt);
+        setScreams(payload.scream);
+        setBeeBooBooBops(payload["bee-boo-boo-bop"]);
+        setSeinfelds(payload.seinfeld);
       }
     });
   }, [entered]);
@@ -49,6 +55,9 @@ function App() {
       boos={boos}
       nytRemixes={nytRemixes}
       nytJingles={nytJingles}
+      screams={screams}
+      beeBooBooBops={beeBooBooBops}
+      seinfelds={seinfelds}
     />
   );
 }
