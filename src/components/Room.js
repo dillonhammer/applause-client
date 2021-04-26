@@ -40,6 +40,15 @@ const SoundsRow = styled.div`
 
 const AudienceName = styled.div`
   margin: 0px;
+  padding: 0px 10px;
+  color: ${({ color, darkMode }) =>
+    color !== COLORS.WHITE
+      ? darkMode
+        ? COLORS.BACKGROUND.BLACK
+        : COLORS.WHITE.BRIGHT
+      : ""};
+  background-color: ${({ color }) =>
+    color !== COLORS.WHITE ? color.DEFAULT : ""};
 `;
 
 const Room = ({
@@ -69,6 +78,18 @@ const Room = ({
     setMuted(!muted);
   };
 
+  const getNameColor = (audienceName) => {
+    if (clapping.includes(audienceName)) return COLORS.RED;
+    else if (airhorns.includes(audienceName)) return COLORS.ORANGE;
+    else if (boos.includes(audienceName)) return COLORS.YELLOW;
+    else if (nytJingles.includes(audienceName)) return COLORS.GREEN;
+    else if (nytRemixes.includes(audienceName)) return COLORS.TEAL;
+    else if (screams.includes(audienceName)) return COLORS.BLUE;
+    else if (beeBooBooBops.includes(audienceName)) return COLORS.VIOLET;
+    else if (seinfelds.includes(audienceName)) return COLORS.PINK;
+    else return COLORS.WHITE;
+  };
+
   return (
     <RoomContainer darkMode={darkMode}>
       <Header
@@ -84,7 +105,13 @@ const Room = ({
       <GridContainer>
         <AudienceContainer>
           {audience.map((audienceName) => (
-            <AudienceName key={audienceName}>{audienceName}</AudienceName>
+            <AudienceName
+              key={audienceName}
+              color={getNameColor(audienceName)}
+              darkMode={darkMode}
+            >
+              {audienceName}
+            </AudienceName>
           ))}
         </AudienceContainer>
         <SoundsContainer>

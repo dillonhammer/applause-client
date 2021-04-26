@@ -64,12 +64,6 @@ const SoundCard = ({
         {prompt}
       </StyledButton>
       <br />
-      {/* <div>
-        {names.length} {desc}
-      </div>
-      {names.map((name) => (
-        <div key={name}>{name}</div>
-      ))} */}
       {names.map((name) => (
         <ReactHowler key={name} src={src} loop html5 volume={volume} />
       ))}
