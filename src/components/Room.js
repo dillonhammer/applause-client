@@ -84,7 +84,7 @@ const Room = ({
   nytJingles,
   nytRemixes,
 }) => {
-  const [volume, setVolume] = useState(80);
+  const [volume, setVolume] = useState(25);
   const [muted, setMuted] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
