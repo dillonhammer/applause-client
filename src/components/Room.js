@@ -65,7 +65,7 @@ const Room = ({
   beeBooBooBops,
   seinfelds,
 }) => {
-  const [volume, setVolume] = useState(25);
+  const [volume, setVolume] = useState(10);
   const [muted, setMuted] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
