@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import "antd/dist/antd.css";
 import Welcome from "./components/Welcome";
 import Room from "./components/Room";
 
-const socket = io(process.env.REACT_APP_SERVER);
+const socket = io(process.env.REACT_APP_SERVER_BASE, {
+  path: process.env.REACT_APP_SERVER_PATH,
+});
 
 function App() {
   const [name, setName] = useState("");
