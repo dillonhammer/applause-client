@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import Welcome from "./components/Welcome";
 import Room from "./components/Room";
 
-const socket = io("https://pit-applause-server.herokuapp.com");
+const socket = io(process.env.REACT_APP_SERVER);
 
 function App() {
   const [name, setName] = useState("");
