@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "react-scripts --openssl-legacy-provider start",
     "start": "react-scripts --openssl-legacy-provider start",
+    "start:prod": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
