@@ -1,0 +1,14 @@
+{
+  "short_name": "Applause",
+  "name": "Applause",
+  "author": "Dillon Hammer",
+  "icons": {
+    "48": "favicon.ico",
+    "32": "favicon-32x32.png",
+    "16": "favicon-16x16.png"
+  },
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
